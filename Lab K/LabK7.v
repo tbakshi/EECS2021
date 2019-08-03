@@ -1,0 +1,35 @@
+/* Name: Tania Bakshi   ID: 215399462 */
+
+module labK; 
+reg a, b, c, expect, var, temp, flag; 
+wire z; 
+not my_not(tmp, b); 
+and my_and(z, a, tmp); 
+initial 
+begin 
+flag = $value$plusargs("a=%b", a); 
+if (flag === 0)
+          $display("Argument a is missing.");
+          
+flag = $value$plusargs("b=%b", b); 
+if (flag === 0)
+          $display("Argument b is missing.");
+          
+flag = $value$plusargs("c=%b", c); 
+if (flag === 0)
+          $display("Argument c is missing.");
+          
+if (flag === 1)
+	begin
+			expect = a & ~c;
+               var = b & c;
+               temp = expect | var ;
+               #1; // wait for z 
+               if (temp === z) 
+               	   $display("PASS: a=%b b=%b c=%b z=%b", a, b, c, z); 
+               	   else 
+               	   $display("FAIL: a=%b b=%b c=%b z=%b", a, b, c, z); 
+               	   end
+        $finish; 
+end 
+endmodule 
